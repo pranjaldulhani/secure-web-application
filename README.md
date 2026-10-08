@@ -1,56 +1,46 @@
 # Secure Web Application
 
+## Project Overview
+
+The Secure Web Application is a simple web-based registration system developed using Python and Flask.
+
+The main purpose of this project is to implement important web security best practices and protect user data from common security threats.
+
 ## Objective
 
-The objective of this project is to implement security best practices in a simple web application and protect user data from common web security threats.
+The objective of this project is to implement security best practices in a web application.
+
+The project focuses on:
+
+- Input Validation
+- SQL Injection Prevention
+- Cross-Site Scripting (XSS) Protection
+- Password Hashing
+- HTTPS
+- Security Headers
+- Security Monitoring and Logging
 
 ## Security Features
 
-This application implements the following security features:
+### 1. Input Validation
 
-1. **Input Validation**
-   - Validates name, email, and password.
-   - Checks required fields and input length.
+The application validates user input before processing it.
 
-2. **SQL Injection Prevention**
-   - Uses prepared statements with parameterized queries.
-   - Prevents malicious SQL commands from being executed.
+It checks:
 
-3. **XSS Protection**
-   - Uses Flask/Jinja2 template auto-escaping.
-   - User input is not directly rendered as HTML.
+- Required fields
+- Name length
+- Email format
+- Minimum password length
 
-4. **Password Hashing**
-   - Passwords are never stored in plain text.
-   - Passwords are securely hashed before storing them in the database.
+### 2. SQL Injection Prevention
 
-5. **HTTPS**
-   - The application supports HTTPS for secure communication.
-   - Local testing uses a self-signed certificate.
+The application uses parameterized queries to prevent SQL Injection attacks.
 
-6. **Security Headers**
-   - X-Content-Type-Options
-   - X-Frame-Options
-   - Content-Security-Policy
-   - Referrer-Policy
+Example:
 
-7. **Security Monitoring and Logging**
-   - Records security-related events such as registration failures and duplicate email attempts.
-
-## Technologies Used
-
-- Python
-- Flask
-- SQLite
-- HTML
-- CSS
-
-## Project Structure
-
-```text
-secure-web-application/
-│
-├── app.py
-├── .gitignore
-└── templates/
-    └── index.html
+```python
+conn.execute(
+    "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+    (name, email, hashed_password)
+)
